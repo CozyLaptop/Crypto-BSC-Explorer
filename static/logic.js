@@ -17,11 +17,25 @@ async function login(){
     document.getElementById("connect-to-wallet").style.display = "none";
     document.getElementById("wallet-address-div").style.display = "block";
     document.getElementById("wallet-address-top").innerText = (formatWalletAddress(account));
-    var balance = web3.eth.getBalance(account).then(bal=>{
+    var chainId = await getChain();
+    // console.log(chainId)
+    var balance = await web3.eth.getBalance(account).then(bal=> {
         balance = web3.utils.fromWei(bal, "ether");
         document.getElementById("balance").style.display = "block";
-        document.getElementById("resultBalances").innerText = (balance) + " ETH";
-        console.log(balance)
+        document.getElementById("resultBalances").innerText = `${balance} ${chainId}`;
+    });
+
+    //ETH chain id = 1
+    //BSC chain id = 56
+}
+async function getChain(){
+    return await web3.eth.net.getId().then(chainID=>{
+        if (chainID === 1){
+            return "ETH";
+        }
+        if (chainID === 56){
+            return "BNB";
+        }
     });
 }
 function formatWalletAddress(account){
