@@ -17,6 +17,12 @@ async function login(){
     document.getElementById("connect-to-wallet").style.display = "none";
     document.getElementById("wallet-address-div").style.display = "block";
     document.getElementById("wallet-address-top").innerText = (formatWalletAddress(account));
+    var balance = web3.eth.getBalance(account).then(bal=>{
+        balance = web3.utils.fromWei(bal, "ether");
+        document.getElementById("balance").style.display = "block";
+        document.getElementById("resultBalances").innerText = (balance) + " ETH";
+        console.log(balance)
+    });
 }
 function formatWalletAddress(account){
     return (account.substring(0, 5)) + "......." + (account.slice(-5));
