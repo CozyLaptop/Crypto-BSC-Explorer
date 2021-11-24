@@ -9,16 +9,12 @@
 <body>
 <main>
     <div class="container">
-        <div class="mt-2 mb-2">
+        <div class="mt-2 mb-2 text-center" id="wallet-address-div" style="display: none">
+            <h2>Connected to:</h2>
+            <h3 class="text-decoration-underline text-primary" id="wallet-address-top">INSERT WALLET ADDRESS HERE</h3>
+        </div>
+        <div class="mt-2 mb-2 text-center" id="connect-to-wallet">
             <h1>Connect to your wallet</h1>
-        </div>
-        <div>
-           <input id="username" class="form-control mt-2 mb-2" type="text" placeholder="Username">
-        </div>
-        <div>
-            <input id="email" class="form-control mt-2 mb-2" type="text" placeholder="Email">
-        </div>
-        <div>
             <button class="btn btn-primary mb-2" id="login" onclick="login();">Connect MetaMask</button>
         </div>
         <hr>

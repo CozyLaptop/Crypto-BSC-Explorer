@@ -1,19 +1,28 @@
-Moralis.initialize("cP60P21nvE7YOkUDdMoGylPkhyYUX2auxmJ8nIN8"); //Application ID
-Moralis.serverURL="https://rklgwlv8hboz.usemoralis.com:2053/server"; //Server URL
-async function login(){
-    Moralis.Web3.authenticate().then(function (user){
-        user.set("name", document.getElementById('username').value);
-        user.set("email", document.getElementById('email').value);
-        user.save();
-        deactivateControls();
-        populate();
-    });
+//Checks if metamask is installed
+if (typeof window.ethereum !== 'undefined') {
+    console.log('MetaMask is installed!');
+} else {
+    console.log('MetaMask is not installed, please install and try again.')
 }
-
+let web3;
+try {
+    web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+    console.log("Successfully loaded Web3.js");
+}catch (e) {
+    console.log("Could not instantiate Web3.js");
+}
+async function login(){
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    document.getElementById("connect-to-wallet").style.display = "none";
+    document.getElementById("wallet-address-div").style.display = "block";
+    document.getElementById("wallet-address-top").innerText = (formatWalletAddress(account));
+}
+function formatWalletAddress(account){
+    return (account.substring(0, 5)) + "......." + (account.slice(-5));
+}
 function deactivateControls(){
-    document.getElementById("login").setAttribute("disabled", null);
-    document.getElementById("username").setAttribute("disabled", null);
-    document.getElementById("email").setAttribute("disabled", null);
+    document.getElementById("connect-to-wallet").style.display = "none";
 }
 async function populate(){
     const balanaces = await Moralis.Web3API.account.getTokenBalances({chain: chainToQuery}).then(buildTableBalances);
