@@ -7,3 +7,5 @@ It utilizes the Bootstrap framework for the frontend, and web3.js for the logic.
 - Then, the application will determine if you're on the Ethereum Chain, or on the Binance Smart Chain.
 - If you're on the Ethereum chain, your wallet balance will be in Ethereum.
 - If you're on the Binance Smart Chain, your balance will be in BNB.
+
+##Created by Albert##
