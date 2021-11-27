@@ -42,3 +42,9 @@ async function getChain(){
 function formatWalletAddress(account){
     return (account.substring(0, 5)) + "......." + (account.slice(-5));
 }
+async function logout(){
+    //Will log user out of MetaMask
+    await web3Modal.clearCachedProvider();
+    document.getElementById("connect-to-wallet").style.display = "block";
+    document.getElementById("wallet-address-div").style.display = "none";
+}
