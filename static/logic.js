@@ -28,7 +28,6 @@ async function login(){
         balanceInCrypto = web3.utils.fromWei(bal, "ether");
     }).then(()=>{
         document.getElementById("resultBalances").innerText = `${balanceInCrypto} ${chainString}`;
-    }).then(()=>{
         getBalanceInUSD(balanceInCrypto);
     });
     document.getElementById("balance").style.display = "block";
@@ -51,8 +50,8 @@ function getChain(chainID){
     }
 }
 
-async function getBalanceInUSD(balanceInCrypto) {
-    await fetch("https://api.coingecko.com/api/v3/" + "/coins/" + coinGeckoID).then(response => {
+function getBalanceInUSD(balanceInCrypto) {
+    fetch("https://api.coingecko.com/api/v3/" + "/coins/" + coinGeckoID).then(response => {
         response.json().then(coin => {
             var currentPrice = parseFloat(coin.market_data.current_price.usd);
             parseFloat(balanceInCrypto)
