@@ -12,6 +12,7 @@ try {
 }catch (e) {
     console.log("Could not instantiate Web3.js");
 }
+//On click of connect MetaMask button
 async function login(){
     //Will prompt user to login via metamask
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -31,11 +32,15 @@ async function getChain(){
     return await web3.eth.net.getId().then(chainID=>{
         //ETH chain id = 1
         //BSC chain id = 56
+        //MATIC chain id = 137
         if (chainID === 1){
             return "ETH";
         }
         if (chainID === 56){
             return "BNB";
+        }
+        if (chainID === 137){
+            return "MATIC";
         }
     });
 }
@@ -43,8 +48,17 @@ function formatWalletAddress(account){
     return (account.substring(0, 5)) + "......." + (account.slice(-5));
 }
 async function logout(){
-    //Will log user out of MetaMask
-    await web3Modal.clearCachedProvider();
+// test if wallet is connected
+//     if (web3Modal.cachedProvider) {
+//         // connected now you can get accounts
+//         const accounts = await web3.eth.getAccounts();
+//     }
+// disconnect wallet
+//     const disconnectWallet = async (web3Modal: any) => {
+//         await web3Modal.clearCachedProvider();
+//     }
+//     await disconnectWallet(web3);
+    await web3.clearCachedProvider();
     document.getElementById("connect-to-wallet").style.display = "block";
     document.getElementById("wallet-address-div").style.display = "none";
 }
