@@ -1,6 +1,6 @@
 # Crypto-Wallet-Explorer
 This is a test Dapp (decentralized application) that works with MetaMask.
-It utilizes the Bootstrap framework for the frontend, and web3.js for the logic. Tehcnically, the blockchain is the backend and database.
+It utilizes the Bootstrap framework for the frontend, and web3.js for the logic. The blockchain is the backend and database.
 
 - Click "Connect to Wallet". This will prompt MetaMask for your signature (basically a login)
 - Upon success, the Dapp will show you a shorthand version of your wallet address.
